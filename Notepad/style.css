@@ -1,0 +1,115 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Raleway';
+    background: linear-gradient(132deg, #ec5218, #1665c1);
+    background-size: 400% 400%;
+    animation: BackgroundGradient 30s ease infinite;
+}
+
+@keyframes BackgroundGradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+main {
+    width: 100%;
+
+}
+button{
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 180px;
+    height: 60px;
+    text-transform: uppercase;
+    background-color: #444;
+    color: white;
+    border-radius: 10px;
+}
+
+
+#new-note {
+    background: #444;
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.container{
+    display: absolute;
+    width: 100%;
+    min-height: 50%;
+    padding-top: 30px;
+}
+#notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+.note {
+    color: #444;
+    background: #fff;
+    display: inline-block;
+    min-width: 220px;
+    width: 19%;
+    height: 150px;
+    margin: 20px;
+    padding: 20px;
+    max-width: 25%;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px #292b29;
+}
+.note:hover{
+}
+.note-title {
+    font-size: 18px;
+}
+.note-content {
+    padding: 10px 0;
+    font-family: 'Kalam';
+}
+.note-date {
+    font-size: 12px;
+
+}
+.note-menu {
+    padding-top: 15px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.far, .fas {
+    color: #999;
+}
+
+.active {
+    color: rgb(209, 54, 54);
+}
+.colors {
+    display: flex;
+}
+.color {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border: 1px solid rgba(0,0,0, 0.5);
+}
+.red {
+    background: rgb(202, 67, 67);
+    color: #fff;
+}
+.green {
+    background: rgb(208, 238, 168);
+
+}
+.blue {
+    background: rgb(208, 238, 243);
+}
