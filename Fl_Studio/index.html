@@ -1,12 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>fl_studio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div class="wrapper">
+        <section class="container">
+            <div class="keys">
+                <div data-key="71" id="a5" class="key boom sound">
+                    <kbd>a</kbd>
+                    <span class="sound">
+                        <p>boom</p>
+                    </span>
+                </div>
+                <div data-key="65" id="a1" class="key clap sound">
+                    <kbd>s</kbd>
+                    <span class="sound">
+                        <p>clap</p>
+                    </span>
+                </div>
+                <div data-key="83" id="a2" class="key hihat sound">
+                    <kbd>d</kbd>
+                    <span class="sound">
+                        <p>hihat</p>
+                    </span>
+                </div>
+                <div data-key="68" id="a3" class="key kick sound">
+                    <kbd>f</kbd>
+                    <span class="sound">
+                        <p>kick</p>
+                    </span>
+                </div>
+                <div data-key="70" id="a4" class="key openhat sound">
+                    <kbd>g</kbd>
+                    <span class="sound">
+                        <p>openhat</p>
+                    </span>
+                </div>
+
+                <div data-key="72" id="a6" class="key ride sound">
+                    <kbd>h</kbd>
+                    <span class="sound">
+                        <p>ride</p>
+                    </span>
+                </div>
+                <div data-key="74" id="a7" class="key snare sound">
+                    <kbd>j</kbd>
+                    <span class="sound">
+                        <p>snare</p>
+                    </span>
+                </div>
+                <div data-key="76" id="a9" class="key tink sound">
+                        <kbd>k</kbd>
+                        <span class="sound">
+                            <p>tink</p>
+                        </span>
+                    </div>
+                <div data-key="75" id="a8" class="key tom sound">
+                    <kbd>l</kbd>
+                    <span class="sound">
+                        <p>tom</p>
+                    </span>
+                </div>
+
+            </div>
+        </section>
+        <div class="button_container">
+            <button id="startRecording" class="start">start</button>
+            <button id="stopRecording" class="stop">stop</button>
+            <button id="playRecording" class="play">play</button>
+        </div>
+    </div>
+
+
+    <audio data-key="65" src="clap.wav" id="clap"></audio>
+    <audio data-key="83" src="hihat.wav" id="hihat"></audio>
+    <audio data-key="68" src="kick.wav" id="kick"></audio>
+    <audio data-key="70" src="openhat.wav" id="openhat"></audio>
+    <audio data-key="71" src="boom.wav" id="boom"></audio>
+    <audio data-key="72" src="ride.wav" id="ride"></audio>
+    <audio data-key="74" src="snare.wav" id="snare"></audio>
+    <audio data-key="75" src="tom.wav" id="tom"></audio>
+    <audio data-key="76" src="tink.wav" id="tink"></audio>
+
+    <script src="code.js"></script>
+
 </body>
+
 </html>
