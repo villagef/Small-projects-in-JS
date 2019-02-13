@@ -1,0 +1,31 @@
+body
+{
+  background-color: rgba(230,230,230);
+}
+.garden {
+    position: relative;
+    width : 800px;
+    height: 800px;
+    border: 10px solid rgba(80, 80, 80, 1);
+    border-radius: 10px;
+  }
+  
+  .ball {
+    position: absolute;
+    width : 30px;
+    height: 30px;
+    background: rgb(82, 0, 80);
+    border-radius: 100%;
+    z-index: 10;
+  }
+  .point
+  {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgb(82, 165, 80);
+    border-radius: 100%;
+    z-index: 1;
+    display: none;
+  }
+  
