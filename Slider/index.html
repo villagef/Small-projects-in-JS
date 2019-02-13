@@ -5,8 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="dist/css/lightbox.css" rel="stylesheet">
+    <script src="dist/js/lightbox-plus-jquery.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="main">
+        <section class="slider">
+            <a href="img/s1.jpg" data-lightbox="galeria_1"><img src="img/s1.jpg" alt="zdjęcie 1" class="color"></a>
+            <a href="img/s2.jpg" data-lightbox="galeria_1"><img src="img/s2.jpg" alt="zdjęcie 2" class="color_2"></a>
+            <a href="img/s3.jpg" data-lightbox="galeria_1"><img src="img/s3.jpg" alt="zdjęcie 3" class="color_2"></a>
+            <a href="img/s4.jpg" data-lightbox="galeria_1"><img src="img/s4.jpg" alt="zdjęcie 4" class="color_2"></a>
+        </section>
+        <script>
+            lightbox.option({
+              'showImageNumberLabel': false
+            })
+        </script>
+    </div>
     
+
+<script>
+    //Parametry
+    let activeElement = 0;
+    const timeChange = 4000;
+    // Pobieramy 4 elementy na których pracujemy
+    const colorImgHtml = document.querySelector('.color');
+          
+    //Informacje w tablicach o elementach podmienianych
+    const colorImages = ['img/s1.jpg', 'img/s2.jpg', 'img/s3.jpg', 'img/s4.jpg'];
+          
+    function changeElement() {
+     console.log()
+    activeElement++;
+        if (activeElement == colorImages.length) 
+        {
+            activeElement = 0;
+        }
+        colorImgHtml.src = colorImages[activeElement];
+    }
+          
+    setInterval(changeElement, timeChange)
+</script>
 </body>
 </html>
