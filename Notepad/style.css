@@ -5,18 +5,12 @@
 
 body {
     font-family: 'Raleway';
-    background: linear-gradient(132deg, #ec5218, #1665c1);
-    background-size: 400% 400%;
-    animation: BackgroundGradient 30s ease infinite;
+    background-color: #0a88d3;
 }
 
-@keyframes BackgroundGradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
 main {
     width: 100%;
+
 
 }
 button{
@@ -32,12 +26,20 @@ button{
 
 
 #new-note {
-    background: #444;
+    background: rgb(78, 76, 76);
     color: white;
     padding: 40px;
     display: flex;
     flex-direction: column;
-    
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #292b29;
+}
+p{
+    text-align: center;
+    margin: 8px;
+    font-size: 20px;
 }
 .container{
     display: absolute;
@@ -66,8 +68,7 @@ button{
     overflow: hidden;
     box-shadow: 5px 5px 15px #292b29;
 }
-.note:hover{
-}
+
 .note-title {
     font-size: 18px;
 }
