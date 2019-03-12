@@ -1,104 +1,75 @@
-var ball   = document.querySelector('.ball');
-var garden = document.querySelector('.garden');
-var output = document.querySelector('.output');
-var point = document.querySelector('.point');
+window.addEventListener('deviceorientation', handleOrientation, true);
 
-let x = 0;
-let y = 0;
+//getting elements
+let ball = document.querySelector('.ball');
+let area = document.querySelector('.play-area');
+let output = document.querySelector('.output');
 
-function handleOrientation(event)
-{
-  x = event.beta; 
-  y = event.gamma; 
+//getting widht and height of the field
+let xMax = area.clientWidth - ball.clientWidth;
+let yMax = area.clientHeight - ball.clientHeight;
 
-  output.innerHTML  = "Beta : " + x + "\n";
-  output.innerHTML += "Gamma: " + y + "\n";
-  output.innerHTML += "Points: " + points + "\n";
-
-
-  //Wymuszamy wartość [-90,90] po to, aby urządzenie nie było
-  //do góry nogami
-  if (x >  90) { x =  90};
-  if (x < -90) { x = -90};
-
-}
-// Wszystkie zmienne które są nam potrzebne, definiujemy je tutaj bo używane są w wielu funkcjach
-let i = 1;
-let xx = 0;
-let yy = 0;
-let xp = 0;
-let yp = 0;
-let points = 0;
-let timer = 10000;
-let mnoznik = setInterval(mnoznikv, 10);
-let pointmnoznik = setInterval(pointPos, timer);
-let penalty = setInterval(removePoint, timer);
-
-// Funkcja mnoznikv definiuje prędkość przesuwu kulki w zależności od nachylenia telefonu
-function mnoznikv()
-{
-  i = 0.04;
+function handleOrientation() {
     
-  xx += x*i;
-  yy += y*i;
-  ball.style.top  = (400 + xx) + "px";
-  ball.style.left = (400 + yy) + "px";
-// Game Over jeżeli punkty spadną nam poniżej 0 lub jeżeli przekroczymy granice planszy    
-  if (xx > 370 || xx < -390 || yy > 370 || yy < -390 || points < 0)
-  {
-    gameOver();
-  }
-  
-  if ((400 + xx) - xp < 25 && (400 + yy) - yp < 25 && (400 + xx) - xp > -25 && (400 + yy) - yp > -25)
-  {
-    addPoint();
-    pointPos();
-  }
-  
+    let beta = event.beta; //turning up/down
+    let gamma = event.gamma; //turning left/right
+
+    output.innerHTML = "beta :" + beta + "\n";
+    output.innerHTML = "gamma :" + gamma + "\n";
+
+    if(beta > 90) {
+        beta = 90;
+    }
+    if(beta < -90) {
+        beta = -90;
+    }
+
+    beta += 90;
+    gamma += 90;
+
+    //where ball can move
+    ball.style.top  = (xMax*beta/90 - 15) + "px";
+    ball.style.left = (yMax*gamma/90 - 15) + "px";
+
+    //barrier on the field ball can't cross
+    if(ball.style.top < 15) {
+        ball.style.top = 15;
+    }
+    if(ball.style.bottom < 15) {
+        ball.style.bottom = 15;
+    }
+    if(ball.style.right < 15) {
+        ball.style.right = 15;
+    }
+    if(ball.style.left < 15) {
+        ball.style.left = 15;
+    }
 }
-// Randomowe ustawienie zielonej kulki na planszy
-function pointPos()
-{
-  point.style.display = "block";
-  xp = ((Math.random() * 790) + 1);
-  yp = ((Math.random() * 790) + 1);
-  point.style.top = (20 + xp) + "px";
-  point.style.left = (20 + yp) + "px";
-  clearInterval(pointmnoznik);
-  pointmnoznik = setInterval(pointPos, timer);
-}
-// Funkcja dodawania punktu, skraca timer dzięki czemu następna zielona kulka pojawia się szybciej
-// Dodatkowo resetuje nam Interval od kary dzięki czemu nie tracimy punktu jeśli na czas zbierzemy zieloną kulke
-function addPoint()
-{
-  points += 1;
-  timer -= 400;
-  clearInterval(penalty);
-  penalty = setInterval(removePoint, timer);
-  if (timer <= 1000)
-  {
-    timer = 1000;
-  }
-}
-// Kara -1 punkt jeśli nie zbierzemy zielonej kulki na czas
-function removePoint()
-{
-  points -= 1;
-  clearInterval(penalty);
-  penalty = setInterval(removePoint, timer);
-}
-// Reset wszystkiego, timera, pozycji, oraz punktów. Dodatkowo wyzerowanie obu timerów
-function gameOver()
-{
-  timer = 10000;
-  xx = 0;
-  yy = 0;
-  points = 0;
-  clearInterval(pointmnoznik);
-  pointmnoznik = setInterval(pointPos, timer);
-  clearInterval(penalty);
-  penalty = setInterval(removePoint, timer);
+//phone motion
+window.addEventListener('devicemotion', handleMotion, true);
+
+function handleMotion() {
+
 }
 
-window.addEventListener('deviceorientation', handleOrientation);
+//over when ball touch hole
+function gameOver() {
+    //elements from html
+    let hole = document.querySelector('.hole');
+
+    let ball = document.querySelector('.ball');
+
+    //getting position of elements
+    let holePosition = hole1.getBoundingClientRect();
+
+//test
+    console.log(holePosition.top, holePosition.right, holePosition.bottom, holePosition.left);
+
+
+    let ballPosition = ball.getBoundingClientRect();
+    console.log(ballPosition.top, ballPosition.right, ballPosition.bottom, ballPosition.left);
+
+}
+
+
 

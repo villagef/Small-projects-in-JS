@@ -1,31 +1,68 @@
-body
-{
-  background-color: rgba(230,230,230);
+*{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
-.garden {
-    position: relative;
-    width : 800px;
-    height: 800px;
-    border: 10px solid rgba(80, 80, 80, 1);
-    border-radius: 10px;
+body, html {
+  height: 100%;
+
+}
+
+.play-area {
+  height: 100%;
+  position: relative;
+  margin: 0;
+  background-image: url("../img/1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.play-area .ball {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 10%;
+  right: 10%;
+  border-radius: 50%;
+  background-image: url("../img/ball.jpg");
+  background-size: cover;
+}
+.play-area .hole {
+  position: relative;
+  z-index: 10;
+  width: 70px;
+  height: 70px;
+  background-image: url("../img/dot.jpg");
+  background-size: cover;
+  top: 10%;
+  left: 30%;
+}
+
+.play-area .output {
+  position: absolute;
+  bottom: 0;
+}
+
+@media only screen and (max-width: 1366px) {
+  .play-area .ball {
+    width: 25px;
+    height: 25px;
   }
-  
-  .ball {
-    position: absolute;
-    width : 30px;
-    height: 30px;
-    background: rgb(82, 0, 80);
-    border-radius: 100%;
-    z-index: 10;
+  .play-area .hole {
+    width: 70px;
+    height: 70px;
   }
-  .point
-  {
-    position: absolute;
+}
+@media only screen and (max-width: 812px) {
+  .play-area .ball {
     width: 20px;
     height: 20px;
-    background: rgb(82, 165, 80);
-    border-radius: 100%;
-    z-index: 1;
-    display: none;
   }
-  
+  .play-area .hole {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

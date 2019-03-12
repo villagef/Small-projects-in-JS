@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Ball in hole Ex">
+    <meta name="keywords" content="HTML,CSS, JavaScript">
+    <meta name="author" content="Jakub Kulikowski">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Game</title>
-    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>Ball in the hole</title>
+    <link rel="stylesheet" href="Style.css">
+
 </head>
-<body onload="pointPos()">
-    <div class="garden">
+<body>
+    <section class="play-area">
         <div class="ball"></div>
-      </div>
-      <div class="point" ></div>
-      
-      <pre class="output"></pre>
-      <script src="Script.js"></script>
+        <div class="hole" class="hole" onmousedown="gameOver()"></div>
+        <pre class="output"></pre>
+    </section>
+    
+
+    <script src="Script.js"></script>
 </body>
 </html>
