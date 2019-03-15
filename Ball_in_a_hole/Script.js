@@ -1,75 +1,89 @@
-window.addEventListener('deviceorientation', handleOrientation, true);
+let ball   = document.querySelector('.ball');
+let playground = document.querySelector('.playground');
+let hole = document.querySelector('.hole');
+let fences = document.querySelectorAll('.fence');
 
-//getting elements
-let ball = document.querySelector('.ball');
-let area = document.querySelector('.play-area');
-let output = document.querySelector('.output');
+let beta = 0;
+let gamma = 0;
+let stop = false;
+let start = true;
+let ballYPosition = 600;
+let ballXPosition = 165;
 
-//getting widht and height of the field
-let xMax = area.clientWidth - ball.clientWidth;
-let yMax = area.clientHeight - ball.clientHeight;
+function handleOrientation(event) {
+    beta = event.beta;
+    gamma = event.gamma;
 
-function handleOrientation() {
-    
-    let beta = event.beta; //turning up/down
-    let gamma = event.gamma; //turning left/right
-
-    output.innerHTML = "beta :" + beta + "\n";
-    output.innerHTML = "gamma :" + gamma + "\n";
-
-    if(beta > 90) {
+    if(beta>90){
         beta = 90;
     }
-    if(beta < -90) {
-        beta = -90;
+    if(gamma < -90){
+        gamma = -90;
     }
-
-    beta += 90;
-    gamma += 90;
-
-    //where ball can move
-    ball.style.top  = (xMax*beta/90 - 15) + "px";
-    ball.style.left = (yMax*gamma/90 - 15) + "px";
-
-    //barrier on the field ball can't cross
-    if(ball.style.top < 15) {
-        ball.style.top = 15;
-    }
-    if(ball.style.bottom < 15) {
-        ball.style.bottom = 15;
-    }
-    if(ball.style.right < 15) {
-        ball.style.right = 15;
-    }
-    if(ball.style.left < 15) {
-        ball.style.left = 15;
-    }
-}
-//phone motion
-window.addEventListener('devicemotion', handleMotion, true);
-
-function handleMotion() {
-
+    if(start){
+        start=false;
+    moveBall();
+  }
 }
 
-//over when ball touch hole
-function gameOver() {
-    //elements from html
-    let hole = document.querySelector('.hole');
+function moveBall(){
+    setTimeout(function(){
+        if(beta<-0.16){
+            ballYPosition-=(0.5*(beta*(-1)));
+            if(ballYPosition<0)ballYPosition=0;
+        }
 
-    let ball = document.querySelector('.ball');
+        if(beta>0.16){
+            ballYPosition+=(0.5*beta);
+            if(ballYPosition>600)ballYPosition=600;
+        }
 
-    //getting position of elements
-    let holePosition = hole1.getBoundingClientRect();
+        if(gamma<-0.16){
+            ballXPosition-=(0.5*(gamma*(-1)));
+            if(ballXPosition<0)ballXPosition=0;
+        }
 
-//test
-    console.log(holePosition.top, holePosition.right, holePosition.bottom, holePosition.left);
+        if(gamma>0.16){
+            ballXPosition+=(0.5*gamma);
+            if(ballXPosition>320)ballXPosition=320;
+        }
+        ball.style.top  = ballYPosition + "px";
+        ball.style.left  = ballXPosition + "px";
+        checkCollisions();
 
+        if(stop == true)
+            return;
+        moveBall();
+    },10)  
+}
 
-    let ballPosition = ball.getBoundingClientRect();
-    console.log(ballPosition.top, ballPosition.right, ballPosition.bottom, ballPosition.left);
-
+function isCollision(a, b){
+    let obj_a = a.getBoundingClientRect();
+    let obj_b = b.getBoundingClientRect();
+    if (obj_a.left < obj_b.left + obj_b.width  && obj_a.left + obj_a.width  > obj_b.left &&
+        obj_a.top < obj_b.top + obj_b.height && obj_a.top + obj_a.height > obj_b.top)
+        return true;
+        else return false;
 }
 
 
 
+function checkCollisions(){
+    for(i=0;i<fences.length;i++){
+        if(isCollision(ball, fences[i])) stop=true;
+    }
+    if(isCollision(ball, hole)){
+        stop=true;
+    }
+}
+
+function newGame(){
+    ballXPosition=165;
+    ballYPosition=570;
+    moveBall();
+    start=true;
+    stop=false;
+}
+
+
+window.addEventListener('deviceorientation', handleOrientation); 

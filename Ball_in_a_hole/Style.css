@@ -1,66 +1,102 @@
 *{
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
-body, html {
-  height: 100%;
-
+body{
+  background-color: rgb(51, 109, 196);
 }
-
-.play-area {
-  height: 100%;
+.playground {
   position: relative;
-  margin: 0;
+  width : 350px;
+  height: 630px;
+  background-color: green;
   background-image: url("img/1.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
+  border: 5px solid black;
 }
-.play-area .ball {
-  width: 60px;
-  height: 60px;
+
+.ball {
   position: absolute;
-  z-index: 1000;
-  bottom: 10%;
-  right: 10%;
-  border-radius: 50%;
+  top   : 600px;
+  left  : 165px;
+  width : 20px;
+  height: 20px;
+  background-color: black;
   background-image: url("img/ball.jpg");
   background-size: cover;
+  border-radius: 100%;
 }
-.play-area .hole {
-  position: relative;
-  z-index: 10;
-  width: 70px;
-  height: 70px;
+.hole{
+  position: absolute;
+  top: 0;
+  left  : 0;
+  width : 30px;
+  height: 30px;
+  background-color: blue;
   background-image: url("img/dot.jpg");
   background-size: cover;
-  top: 10%;
-  left: 30%;
+  border-radius: 100%;
 }
 
-.play-area .output {
+#timer{
+  margin-left: 20px;
+  margin-top: 20px;
+  float: left;
+  font-size: 20px;
+}
+.fence{
   position: absolute;
-  bottom: 0;
+  background: rgb(22, 108, 114);
 }
 
-@media only screen and (max-width: 1366px) {
-  .play-area .ball {
-    width: 25px;
-    height: 25px;
+#fence_1{
+  top: 500px;
+  right: 0;
+  height: 5px;
+  width: 300px;
+}
+#fence_2{
+  top: 350px;
+  left: 0;
+  height: 10px;
+  width: 300px;
+}
+#fence_3{
+  top: 230px;
+  right: 0;
+  height: 10px;
+  width: 300px;
+}
+#fence_4{
+  top: 100px;
+  left: 0;
+  height: 5px;
+  width: 300px;
+}
+
+@media only screen and (max-width: 800px) {
+  .ball {
+    width: 35px;
+    height: 35px;
   }
-  .play-area .hole {
-    width: 70px;
-    height: 70px;
+  .hole {
+    width: 45px;
+    height: 45px;
+  }
+  .playground{
+      width: 355px;
   }
 }
-@media only screen and (max-width: 812px) {
-  .play-area .ball {
-    width: 20px;
-    height: 20px;
+@media only screen and (max-width: 360px) {
+  .ball {
+    width: 30px;
+    height: 30px;
   }
-  .play-area .hole {
-    width: 50px;
-    height: 50px;
+  .hole {
+    width: 40px;
+    height: 40px;
+  }
+  .playground{
+      width: 350px;
   }
 }
