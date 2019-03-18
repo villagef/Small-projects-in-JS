@@ -1,131 +1,94 @@
-// Załadowanie i dodanie mapy 
+let myMap;
 function initMap() {
-    // Lokalizacja Krakowa
-    let lokacja = {lat: 50, lng: 20};
-    // Mapa, centrum Krakowa
-    let map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 4, center: lokacja});
-    // Marker ustawiony w Krakowie 
-    marker = new google.maps.Marker({position: lokacja, map: map});
-    marker2 = new google.maps.Marker({position: lokacja, map: map});
+    //stworzenie mapy
+    myMap = new google.maps.Map(document.getElementById('myMap'), {
+        //lokalizacja startowa
+        center: {lat: 52.2297, lng: 21.0122},
+        zoom: 10,
+        mapTypeId: 'satellite'
+    });
 
-        wysokosc = 0;
-        dlugosc = 0;
-        document.body.addEventListener('keypress', (e)=>{
-          
-        switch (e.charCode){
-              //w
-            case 119:
-            {
-                wysokosc += 0.1;
-                break;
-            }
-              //a
-            case 97:
-            {
-                dlugosc -= 0.1;
-                break;
-            }
-              //s
-            case 115:
-            {
-                wysokosc -= 0.1;
-                break;
-            }
-              //d
-            case 100:
-            { 
-                dlugosc += 0.1;
-                break;
-            }
-        }
-          
-        marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
-        // Tutaj wysyłamy swoją pozycje oraz nick jako obiekt JSON,
-        // "KOD" służy do tego żeby można było "rozpoznać" czy wiadomość która do nas dociera to pozycja na mapie czy wiadomość chatu.
-        let data = { "1" : wysokosc, "2" : dlugosc, "3" : "KOD", "7" : nick.value};
-        let message = JSON.stringify(data);
-        websocket.send(message);
+    if(navigator.geolocation){
+        //reakcja na podanie lokalizacji
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let currentPosition = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            setMapMarker(currentPosition);
+        },
+        //reakcja na zablokowanie lokalizacji
+        function(){
+            setMapMarker({lat:myMap.getCenter().lat(),lng:myMap.getCenter().lng()});
         });
+    //reakcja na brak wsparcia dla lokalizacji    
+    }else{
+        setMapMarker({lat:myMap.getCenter().lat(),lng:myMap.getCenter().lng()});
     }
+}
 
-        // Websocket chat
-        
-        connected = document.getElementById("connected");
-        log = document.getElementById("log");
-        chat = document.getElementById("chat");
-        nick = document.getElementById("nick");
-        form = chat.form;
-        state = document.getElementById("status");
-					
-        if (window.WebSocket === undefined) 
-        {
-           state.innerHTML = "sockets not supported";
-           state.className = "fail";
-        }
-        else 
-        {
-           if (typeof String.prototype.startsWith != "function") 
-            {
-                String.prototype.startsWith = function (str) {
-                return this.indexOf(str) == 0}
-            }
-            window.addEventListener("load", onLoad, false);
-        }
-		// Adres naszego serwera websocketowego			
-        function onLoad() {
-           let wsUri = "ws://design.net.pl:8010";
-            websocket = new WebSocket(wsUri);
-            websocket.onopen = function(evt) { onOpen(evt) };
-            websocket.onclose = function(evt) { onClose(evt) };
-            websocket.onmessage = function(evt) { onMessage(evt) };
-            websocket.onerror = function(evt) { onError(evt) };
-        }
-					
-        function onOpen(evt) 
-        {
-            state.className = "success";
-            state.innerHTML = "Serwer WebSocket jest Online";
-        }
-					
-        function onClose(evt) 
-        {
-            state.className = "fail";
-            state.innerHTML = "Serwer WebSocket jest Offline";
-            connected.innerHTML = "0";
-        }
-		// Funkcja która zajmuje się odbieraniem wiadomości			
-        function onMessage(evt) 
-        {
-            nick.value;
-            let message = evt.data;
-            let pozycja = JSON.parse(message);
-            // Sprawdzamy czy to co przyszło jest otagowane jako "CHAT" czy "KOD", jeżeli "CHAT" to dodajemy wiadomość do okna wiadomości
-            if (pozycja['6'] === "CHAT" )
-            {
-              message = log.innerHTML = '<li class = "message">' + 
-              pozycja['4'] + " : " + pozycja['5'] + "</li>" + log.innerHTML;
-            }
-            // Jeżeli "KOD" to sprawdzamy czy nick w wiadomości jest różny od naszego
-            // Chodzi tu o to żeby ustawiać pozycję markera2 tylko kiedy ktoś "obcy" wysyła nam jego pozycję
-            else if (pozycja['3'] === "KOD" && pozycja['7'] !== nick.value )
-            {
-                marker2.setPosition({ lat: 50 + pozycja['1'], lng: 20 + pozycja['2'] });
-            }
-        }
-					
-        function onError(evt) 
-        {
-            state.className = "fail";
-            state.innerHTML = "Błąd komunikacji";
-        }
-		// Dodajemy wiadomość, jak widać mamy identyfikator "CHAT" jak i wysyłamy swój nick żeby wiadomo było kto pisze.			
-        function addMessage() 
-        {
-            let mdata = { "4" : nick.value,"5" : chat.value, "6" : "CHAT"};
-            let message = JSON.stringify(mdata);
-            chat.value = "";
-            nick.value;
-            websocket.send(message);
-        }
-        
+let marker;
+//ustawienie markera/mapy w pozycji i uruchomienie interwalu odpowiedzialnego za ruszanie nimi
+function setMapMarker(position){
+    marker = new google.maps.Marker({position: position, map: myMap, icon: "icons/pin.png"});
+    myMap.panTo(marker.position);
+    setInterval(move,30);
+}
+
+let atop = false, abot = false, aright = false, aleft = false;
+//wcisniecie strzalek
+window.addEventListener("keydown",function(e){
+    switch(e.keyCode){
+        case 37:
+        aleft = true;
+        break;
+        case 39:
+        aright = true;
+        break;
+        case 38:
+        atop = true;
+        break;
+        case 40:
+        abot = true;
+        break;
+    }
+})
+//puszczenie strzalek
+window.addEventListener("keyup",function(e){
+    switch(e.keyCode){
+        case 37:
+        aleft = false;
+        break;
+        case 39:
+        aright = false;
+        break;
+        case 38:
+        atop = false;
+        break;
+        case 40:
+        abot = false;
+        break;
+    }
+})
+
+//ruszanie markerem/mapa
+function move(){
+    let position = {
+        lat: marker.position.lat(),
+        lng: marker.position.lng()
+    };
+    if(atop){
+        position.lat += 0.01;
+    }
+    if(abot){
+        position.lat -= 0.01;
+    }
+    if(aright){
+        position.lng += 0.01;
+    }
+    if(aleft){
+        position.lng -= 0.01;
+    }
+    marker.setPosition(position);
+    myMap.panTo(marker.position);
+}

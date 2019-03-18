@@ -1,31 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>WSGoogleMap</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="map"></div>
-    <section id = "wrapper">
-      <header>
-         <h1>WebSocket Chat</h1>
-      </header>
-      <article>
-        <form onsubmit = "return false;">
-          <input type = "text" id = "nick" placeholder = "Wprowadź nick" />
-          </form>
-        <form onsubmit = "addMessage(); return false;">
-           <input type = "text" id = "chat" placeholder = "Wprowadź tekst i naciśnij enter" />
-        </form>
-        <p id = "status">Serwer WebSocket jest Offline</p>
-        <ul id = "log"></ul>
-     </article>
-    
+    <div id="myMap"></div>
+
     <script src="script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARkS-dsh-7IirtcQg3oSZEHudV6Uw9Iic&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAusgQDvZqFJgavfLfQdu2PorF7VPr0ANQ&callback=initMap"
     async defer></script>
 </body>
 </html>
