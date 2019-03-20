@@ -1,11 +1,93 @@
-canvas {
-    margin: auto;
-    background: #ececec;
-    width: 100%;
-  }
-  
-  .btn-disabled {
-    color: #fff !important;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+body{
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  background-color: rgb(72, 84, 95);
+}
+.container{
+  width: 100%;
+  height: 100%;
 
-  
+}
+.left_box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  background-image: url(http://natbg.com/wp-content/uploads/2016/11/lakes-emerald-mountain-lake-rocks-mountainscape-sky-water-nice-summer-trees-reflection-beautiful-lovely-river-pretty-snowy-view-desktop-background-images.jpg);
+  background-size: cover;
+  box-shadow: 0 0 36px 0 black;
+}
+canvas{
+  min-width: 100%;
+  height: 100%;
+  width: auto;
+
+}
+.right_box{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 80%;
+}
+#btn_field{
+  position: relative;
+  width: 30%;
+  height: 20%;
+  top: 0;
+  left: 50%;
+  margin-bottom: 5px;
+  transform: translate(-50%);
+}
+#btn_title{
+  height: 40%;
+  width: 100%;
+  text-align: center;
+  padding-top: 5%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#paintColor{
+  width: 100%;
+  height: 40%;
+}
+#btn{
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  float: left;
+  text-align: cen
+}
+#btn p{
+  margin: 0 auto;
+  font-size: 150%;
+}
+.bottom_box{
+  position: absolute;
+  top: 83%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+}
+.browse{
+  width: 20%;
+  height: 40%;
+  margin: 0 auto;
+}
+.file_label{
+  margin: 0 auto;
+  width: 100%;
+}
+.file_label p {
+  text-align: center;
+  font-size: 24px;
+}
