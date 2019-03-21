@@ -1,14 +1,9 @@
-let imageLoader = document.getElementById('imageLoader');
-const uploadFile = document.querySelector("#upload_file");
-imageLoader.addEventListener('change', handleImage, false);
-let canvas = document.getElementById('canvas');
+let imageLoader = document.querySelector('#imageLoader');
+let canvas = document.querySelector('#canvas');
 let ctx = canvas.getContext('2d');
 let isDrawing;
 let lastPoint;
 let img = new Image();
-
-let pixels;
-let original;
 
 //pobranie zdjęcia
 function handleImage(x){
@@ -23,6 +18,8 @@ function handleImage(x){
     }
     reader.readAsDataURL(x.target.files[0]);     
 }
+imageLoader.addEventListener('change', handleImage, false);
+
 //rysowanie
 canvas.onmousedown = function(e) {
   isDrawing = true;
@@ -61,9 +58,50 @@ function  getMousePosition(canvas, evt) {
     y: (evt.clientY - rect.top) * scaleY    
   }
 }
-document.getElementById("paintColor").addEventListener("change",function(e){
+document.querySelector("#paintColor").addEventListener("change",function(e){
   strokeColor = e.target.value;
 })
 
 
+//filtry
+const brightness = document.querySelector('#brightness');
+const contrast = document.querySelector('#contrast');
+const saturation = document.querySelector('#saturation');
+
+contrast.onkeyup = contrast.onchange = function()
+{
+    let contrast = document.querySelector('#canvas'),
+      value = parseInt(this.value);
+
+        if (value > 100 || value < 0)
+    return false;
+
+   // Wybór filtru
+    contrast.style.filter = "contrast("+ value +"%)";
+}
+
+
+brightness.onkeyup = brightness.onchange = function()
+{
+    let brightness = document.querySelector('#canvas'),
+        value = parseInt(this.value);
+
+        if (value > 100 || value < 0)
+    return false;
+
+    // wybór filtru
+    brightness.style.filter = "brightness("+ value +"%)";
+}
+
+sepia.onkeyup = sepia.onchange = function()
+{
+    let sepia = document.querySelector('#canvas'),
+        value = parseInt(this.value);
+
+        if (value > 100 || value < 0)
+    return false;
+
+    // wybór filtru
+    sepia.style.filter = "sepia("+ value +"%)";
+}
 
